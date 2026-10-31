@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#c8b6f0">
+    <title>MEVARI — Your Space</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div class="stars"></div>
+
+<!-- ЗАСТАВКА -->
+<section id="splash" class="screen splash-screen active">
+    <div class="splash-content">
+        <div class="splash-orbit">✦</div>
+        <div class="splash-logo">MEVARI</div>
+        <p class="splash-tagline">YOUR SPACE · YOUR MESSAGES</p>
+        <div class="splash-loader"></div>
+    </div>
+</section>
+
+<!-- ПРИВЕТСТВИЕ -->
+<section id="welcome" class="screen">
+    <div class="glass-card">
+        <div class="logo">MEVARI</div>
+        <p class="tagline">YOUR SPACE · YOUR MESSAGES</p>
+        <h1>Твоя маленькая вселенная</h1>
+        <p>Место для общения, друзей и новых историй.</p>
+        <button onclick="showScreen('login')">Войти</button>
+        <button class="secondary" onclick="showScreen('register')">Создать аккаунт</button>
+        <p class="version">BETA 1.0</p>
+    </div>
+</section>
+
+<!-- ВХОД -->
+<section id="login" class="screen">
+    <div class="glass-card">
+        <h1>С возвращением ✦</h1>
+        <input id="loginEmail" type="email" placeholder="Электронная почта">
+        <input id="loginPassword" type="password" placeholder="Пароль">
+        <button onclick="login()">Войти</button>
+        <button class="secondary" onclick="showScreen('welcome')">Назад</button>
+        <p id="loginMessage"></p>
+    </div>
+</section>
+
+<!-- РЕГИСТРАЦИЯ -->
+<section id="register" class="screen">
+    <div class="glass-card">
+        <h1>Создай свой мир ✧</h1>
+        <input id="registerName" placeholder="Твоё имя">
+        <input id="registerNickname" placeholder="Никнейм">
+        <input id="registerEmail" type="email" placeholder="Электронная почта">
+        <input id="registerPassword" type="password" placeholder="Пароль">
+        <button onclick="register()">Зарегистрироваться</button>
+        <button class="secondary" onclick="showScreen('welcome')">Назад</button>
+        <p id="registerMessage"></p>
+    </div>
+</section>
+
+<!-- ГЛАВНАЯ -->
+<section id="home" class="screen">
+    <div class="app-layout">
+        <header>
+            <div class="logo">MEVARI</div>
+            <button class="icon-button" onclick="showScreen('profile')">🌙</button>
+        </header>
+
+        <h1>Твоё пространство</h1>
+        <p>Рада видеть тебя здесь ✦</p>
+
+        <!-- ПОИСК ПОЛЬЗОВАТЕЛЕЙ -->
+        <div class="user-search">
+            <input
+                id="userSearch"
+                type="search"
+                placeholder="Найти пользователя по никнейму..."
+                oninput="searchUsers()"
+                autocomplete="off"
+            >
+            <div id="searchResults"></div>
+        </div>
+
+        <h2>Мои чаты</h2>
+
+        <button class="chat-item" onclick="showScreen('chat')">
+            <span class="avatar">🌙</span>
+            <span>
+                <strong>Лунный чат</strong>
+                <small>Твоё маленькое пространство</small>
+            </span>
+        </button>
+
+        <button class="chat-item" onclick="showScreen('chat')">
+            <span class="avatar">⭐</span>
+            <span>
+                <strong>Космические друзья</strong>
+                <small>Здесь пока тихо...</small>
+            </span>
+        </button>
+
+        <nav class="bottom-nav">
+            <button onclick="showScreen('home')">⌂<small>Главная</small></button>
+            <button onclick="showScreen('chat')">✉<small>Чаты</small></button>
+            <button onclick="showScreen('profile')">◉<small>Профиль</small></button>
+            <button onclick="showScreen('settings')">⚙<small>Настройки</small></button>
+        </nav>
+    </div>
+</section>
+
+<!-- ЧАТ -->
+<section id="chat" class="screen">
+    <div class="app-layout">
+        <header>
+            <button class="icon-button" onclick="showScreen('home')">←</button>
+            <h2>Лунный чат 🌙</h2>
+        </header>
+
+        <div class="chat-messages">
+            <div class="message received">Привет! Добро пожаловать ✨</div>
+            <div class="message sent">Привет, MEVARI! 💜</div>
+        </div>
+
+        <div class="message-input">
+            <input id="messageText" placeholder="Написать сообщение...">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+</section>
+
+<!-- ПРОФИЛЬ -->
+<section id="profile" class="screen">
+    <div class="glass-card">
+        <div class="profile-avatar">🌌</div>
+        <h1>Мой профиль</h1>
+        <p>Твоя маленькая вселенная</p>
+        <input placeholder="Твоё имя">
+        <input placeholder="Твой никнейм">
+        <button onclick="showScreen('home')">Сохранить</button>
+        <button class="secondary" onclick="showScreen('home')">Назад</button>
+    </div>
+</section>
+
+<!-- НАСТРОЙКИ -->
+<section id="settings" class="screen">
+    <div class="glass-card">
+        <h1>Настройки ⚙</h1>
+        <button onclick="showScreen('profile')">Мой профиль</button>
+        <button class="secondary" onclick="showScreen('home')">Вернуться домой</button>
+        <button class="secondary" onclick="logout()">Выйти</button>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

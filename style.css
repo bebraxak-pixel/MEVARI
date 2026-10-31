@@ -1,0 +1,578 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --lavender: #b9a2e6;
+    --purple: #9275c4;
+    --text: #514568;
+    --muted: #9385a8;
+    --glass: rgba(255, 255, 255, 0.58);
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 15% 15%, #fff 0, transparent 35%),
+        radial-gradient(circle at 85% 80%, #dfd1fa 0, transparent 40%),
+        linear-gradient(135deg, #eee8ff, #d8c9f4, #f7edff);
+}
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 0;
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, white 50%, transparent 100%),
+        radial-gradient(2px 2px at 70% 20%, white 50%, transparent 100%),
+        radial-gradient(3px 3px at 45% 75%, white 50%, transparent 100%),
+        radial-gradient(2px 2px at 85% 60%, white 50%, transparent 100%);
+    background-size: 220px 220px;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 22px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.screen.active {
+    display: flex;
+    animation: appear 0.45s ease;
+}
+
+.glass-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 35px 26px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 30px;
+    background: var(--glass);
+    box-shadow: 0 18px 50px rgba(112,85,160,0.15);
+    backdrop-filter: blur(18px);
+}
+
+.logo {
+    font-size: 34px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: var(--purple);
+    margin-bottom: 12px;
+}
+
+.tagline {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--muted);
+}
+
+h1 {
+    font-size: 27px;
+    margin: 18px 0;
+}
+
+h2 {
+    font-size: 21px;
+    margin: 22px 0 14px;
+}
+
+p {
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 12px 0;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.glass-card > button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 12px;
+    border-radius: 16px;
+    color: white;
+    background: linear-gradient(135deg, #b9a2e6, #9275c4);
+}
+
+.glass-card > button.secondary {
+    color: #806ca6;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid #ded2f2;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 9px 0;
+    border: 1px solid #e1d6f2;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.78);
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(146,117,196,0.13);
+}
+
+.version {
+    margin-top: 25px;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.app-layout {
+    width: 100%;
+    max-width: 650px;
+    min-height: 85vh;
+    padding: 25px;
+    border: 1px solid white;
+    border-radius: 28px;
+    background: var(--glass);
+    box-shadow: 0 18px 50px rgba(112,85,160,0.13);
+    backdrop-filter: blur(18px);
+    display: flex;
+    flex-direction: column;
+}
+
+.app-layout header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.app-layout header .logo {
+    margin: 0;
+}
+
+.icon-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.75);
+    color: var(--purple);
+    font-size: 21px;
+}
+
+.chat-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    margin: 7px 0;
+    text-align: left;
+    border-radius: 18px;
+    color: var(--text);
+    background: rgba(255,255,255,0.65);
+    border: 1px solid rgba(255,255,255,0.8);
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: #e9defb;
+    font-size: 24px;
+}
+
+.chat-item span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.chat-item small {
+    color: var(--muted);
+    font-weight: normal;
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 22px;
+}
+
+.bottom-nav button {
+    flex: 1;
+    padding: 10px 3px;
+    border-radius: 14px;
+    color: var(--purple);
+    background: rgba(255,255,255,0.65);
+    font-size: 20px;
+}
+
+.bottom-nav small {
+    display: block;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+/* ПОЛНОЭКРАННЫЙ ЧАТ */
+
+#chat {
+    padding: 0;
+    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
+    align-items: stretch;
+}
+
+#chat .app-layout {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    padding: 16px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#chat header {
+    flex-shrink: 0;
+    margin-bottom: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(146,117,196,0.15);
+}
+
+.chat-messages {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px 0;
+}
+
+.message {
+    max-width: 80%;
+    padding: 13px 16px;
+    border-radius: 18px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.received {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.85);
+}
+
+.sent {
+    align-self: flex-end;
+    background: #cbb8ef;
+}
+
+.message-input {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 12px;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.message-input input {
+    margin: 0;
+}
+
+.message-input button {
+    width: 50px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    color: white;
+    background: var(--purple);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    display: grid;
+    place-items: center;
+    margin: 15px auto;
+    border-radius: 50%;
+    background: #e5d8fa;
+    font-size: 45px;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .app-layout {
+        padding: 18px;
+    }
+
+    .glass-card {
+        padding: 28px 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #chat .app-layout {
+        padding: 12px;
+    }
+}
+/* MEVARI — SPLASH SCREEN */
+
+#splash {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background:
+        radial-gradient(circle at center, #eee5ff 0%, #d7c7f5 55%, #b9a5df 100%);
+    overflow: hidden;
+}
+
+.splash-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: splashAppear 1.8s ease both;
+}
+
+.splash-logo {
+    font-size: clamp(42px, 12vw, 65px);
+    font-weight: bold;
+    letter-spacing: 9px;
+    color: #8064b4;
+    text-shadow: 0 5px 25px rgba(255,255,255,0.8);
+}
+
+.splash-tagline {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #786895;
+    margin-top: 15px;
+}
+
+.splash-orbit {
+    font-size: 35px;
+    color: white;
+    margin-bottom: 20px;
+    animation: orbitFloat 3s ease-in-out infinite;
+}
+
+.splash-loader {
+    width: 65px;
+    height: 3px;
+    margin-top: 35px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5);
+    overflow: hidden;
+    position: relative;
+}
+
+.splash-loader::after {
+    content: "";
+    position: absolute;
+    width: 35%;
+    height: 100%;
+    background: white;
+    border-radius: 10px;
+    animation: loaderMove 1.5s ease-in-out infinite;
+}
+
+@keyframes splashAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes orbitFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(15deg);
+    }
+}
+
+@keyframes loaderMove {
+    from {
+        left: -35%;
+    }
+    to {
+        left: 100%;
+    }
+}
+/* MEVARI — SEARCH RESULTS */
+
+.user-search {
+    width: 100%;
+    position: relative;
+}
+
+#searchResults {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.9);
+    box-shadow: 0 5px 15px rgba(112,85,160,0.08);
+}
+
+.search-result span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.search-result small {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+#searchResults:not(:empty) {
+    padding-bottom: 8px;
+}
+/* MEVARI — COSMIC CHAT DESIGN */
+
+#chat {
+    background:
+        radial-gradient(ellipse at top, #eee5ff 0%, transparent 55%),
+        linear-gradient(160deg, #f8f3ff, #e9ddff);
+    color: #51416d;
+    padding: 18px;
+    box-sizing: border-box;
+}
+
+#chat h1 {
+    color: #7355a5;
+    font-size: 23px;
+    font-weight: 700;
+    text-align: center;
+    margin: 12px 0 20px;
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+}
+
+.message {
+    max-width: 78%;
+    padding: 12px 16px;
+    border-radius: 19px;
+    font-size: 15px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+    box-shadow: 0 3px 12px rgba(100, 75, 145, 0.08);
+}
+
+.message.sent {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #b99ae9, #a98bdc);
+    color: white;
+    border-bottom-right-radius: 6px;
+}
+
+.message.received {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.9);
+    color: #594773;
+    border-bottom-left-radius: 6px;
+}
+
+#chat input {
+    border: 1px solid #ddcef5;
+    border-radius: 22px;
+    padding: 13px 16px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #51416d;
+    outline: none;
+}
+
+#chat button {
+    border-radius: 20px;
+    transition: transform 0.2s ease;
+}
+
+#chat button:active {
+    transform: scale(0.96);
+}
+/* MEVARI — CHAT HEADER */
+
+#chat h1 {
+    color: #7355a5;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px;
+    margin: 0 0 14px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 18px rgba(120, 90, 160, 0.08);
+    backdrop-filter: blur(12px);
+}
+
+#chat h1::before {
+    content: "🌙 ";
+}
